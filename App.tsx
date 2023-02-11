@@ -12,10 +12,11 @@ export default function App() {
     return null;
   }
 
-  <View style={styles.container}>
-    <Text>Open up App.tsx to start working on your app!</Text>
-    <StatusBar style="auto" />
-  </View>;
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}> BlockBucks </Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -24,6 +25,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  text: {
     fontFamily: "Urbanist_700Bold",
+    fontSize: 40,
   },
 });
