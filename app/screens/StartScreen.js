@@ -34,6 +34,10 @@ const StartScreen = () => {
           console.log("Pressed");
         }}
       />
+      <Text style={styles.bottomText}>
+        By signing up or logging in, I accept MasterPass' Terms of Service and
+        Privacy Policy.
+      </Text>
     </View>
   );
 };
@@ -63,14 +67,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#718096",
     marginTop: 10,
-    marginBottom: 40
+    marginBottom: 40,
   },
-
+  bottomText: {
+    width: 370,
+    position: "absolute",
+    bottom: 36,
+    fontSize: 10,
+    color: "#4A5568",
+    textAlign: "center",
+    letterSpacing: 0.3,
+  },
   topImage: {
     position: "absolute",
     height: 480,
     top: 0,
-    resizeMode: "contain"
+    resizeMode: "contain",
   },
 });
 

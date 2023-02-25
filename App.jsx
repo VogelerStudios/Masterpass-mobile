@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
-import StartScreen from "./app/screens/StartScreen";
+import SignUpScreen from "./app/screens/SignUpScreen";
 
 export default function App() {
-  return <StartScreen />;
+  return <SignUpScreen />;
 }
 
 const styles = StyleSheet.create({
