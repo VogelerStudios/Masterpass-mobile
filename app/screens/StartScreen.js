@@ -3,7 +3,7 @@ import { Image, View, Text, StyleSheet } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import SocialLoginButton from "../components/SocialLoginButton";
 
-const StartScreen = () => {
+const StartScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
@@ -17,7 +17,7 @@ const StartScreen = () => {
       <PrimaryButton
         title={"Continue with Email"}
         onPress={() => {
-          console.log("Pressed");
+          navigation.navigate("Login");
         }}
       />
       <SocialLoginButton

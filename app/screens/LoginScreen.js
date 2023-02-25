@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, StatusBar } from "react-native";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import PrimaryTextInput from "../components/PrimaryTextInput";
 import SocialLoginButton from "../components/SocialLoginButton";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,11 +36,10 @@ const LoginScreen = () => {
       />
 
       <Text style={styles.forgotPassword}> Forgot Password?</Text>
-
       <PrimaryButton
         title={"Sign In"}
         onPress={() => {
-          console.log("Pressed");
+          console.log("Logged In");
         }}
         style={{ marginTop: 24 }}
       />
@@ -67,7 +66,14 @@ const LoginScreen = () => {
       />
       <View style={styles.bottomTextContainer}>
         <Text style={styles.bottomText}>Don’t have an account?</Text>
-        <Text style={styles.bottomTextLink}>Sign Up</Text>
+        <Text
+          style={styles.bottomTextLink}
+          onPress={() => {
+            navigation.navigate("SignUp");
+          }}
+        >
+          Sign Up
+        </Text>
       </View>
     </View>
   );
@@ -75,12 +81,13 @@ const LoginScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
   },
   title: {
-    marginTop: 110,
+    marginTop: 60,
     width: 370,
     textAlign: "left",
     fontStyle: "normal",
@@ -135,11 +142,11 @@ const styles = StyleSheet.create({
   },
   bottomTextContainer: {
     width: 370,
-    flexDirection:'row',
-    flexWrap:'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "center",
     marginTop: "35%",
-},
+  },
   bottomText: {
     fontSize: 12,
     color: "#4A5568",

@@ -32,10 +32,12 @@ const HomeScreen = () => {
             <FeaturedCard />
           </ScrollView>
           <Text style={styles.featuredTitle}>Popular Events</Text>
+          <View style={{marginBottom: 80}}>
           <PopularEventCard />
           <PopularEventCard />
           <PopularEventCard />
           <PopularEventCard />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </View>

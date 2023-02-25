@@ -4,7 +4,7 @@ import PrimaryButton from "../components/PrimaryButton";
 import PrimaryTextInput from "../components/PrimaryTextInput";
 import SocialLoginButton from "../components/SocialLoginButton";
 
-const LoginScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -75,7 +75,14 @@ const LoginScreen = () => {
       />
       <View style={styles.bottomTextContainer}>
         <Text style={styles.bottomText}>Have an account?</Text>
-        <Text style={styles.bottomTextLink}>Login</Text>
+        <Text
+          style={styles.bottomTextLink}
+          onPress={() => {
+            navigation.navigate("Login");
+          }}
+        >
+          Login
+        </Text>
       </View>
     </View>
   );
@@ -83,12 +90,13 @@ const LoginScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
   },
   title: {
-    marginTop: 110,
+    marginTop: 80,
     width: 370,
     textAlign: "left",
     fontStyle: "normal",
@@ -153,4 +161,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignUpScreen;
