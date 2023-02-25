@@ -10,7 +10,7 @@ import SignUpScreen from "./app/screens/SignUpScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   if (isLogin) {
     return (
       <NavigationContainer>
