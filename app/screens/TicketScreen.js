@@ -18,7 +18,6 @@ const TicketScreen = () => {
         <ScrollView style={{ minHeight: "100%" }}>
           <Text style={styles.header}>My Tickets</Text>
           <Ticket />
-          <Ticket />
         </ScrollView>
       </SafeAreaView>
     </View>

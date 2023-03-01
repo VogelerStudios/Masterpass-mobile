@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, StatusBar } from "react-native";
+import {
+  Alert,
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  StatusBar,
+} from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import PrimaryTextInput from "../components/PrimaryTextInput";
 import SocialLoginButton from "../components/SocialLoginButton";
+import { createCircleWallet, createFlowWallet } from "../utils/OpenPGP";
 
-const SignUpScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation, isLogged, logUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,6 +22,25 @@ const SignUpScreen = ({ navigation }) => {
   const handlePasswordChange = (newText) => {
     setPassword(newText);
   };
+  const walletsAlert = (address, onPress) =>
+    Alert.alert(
+      "Flow Wallet Address:",
+      address,
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Continue",
+          onPress: () => {
+            onPress(true);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
 
   return (
     <View style={styles.container}>
@@ -47,8 +74,15 @@ const SignUpScreen = ({ navigation }) => {
 
       <PrimaryButton
         title={"Sign Up"}
-        onPress={() => {
-          console.log("Pressed");
+        onPress={async () => {
+          createCircleWallet().then((circleWallet) => {
+            createFlowWallet(circleWallet.data.walletId).then((response) => {
+              const flowAddress = response.data.address;
+              // console.info("circleWallet: ", circleWallet);
+              // console.info("flowAddress: ", flowAddress);
+              walletsAlert(flowAddress, logUser);
+            });
+          });
         }}
         style={{ marginTop: 24 }}
       />

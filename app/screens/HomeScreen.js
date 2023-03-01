@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -11,8 +11,26 @@ import CategorySelector from "../components/CategorySelector";
 import DigitalCollectibleEducationBanner from "../components/DigitalCollectibleEducationBanner";
 import FeaturedCard from "../components/FeaturedCard";
 import PopularEventCard from "../components/PopularEventCard";
+import { BASE_URL } from "@env";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    const url =
+      BASE_URL;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+      },
+    };
+
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => setEvents(json))
+      .catch((err) => console.error("error:" + err));
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
@@ -27,16 +45,22 @@ const HomeScreen = () => {
             showsHorizontalScrollIndicator={false}
             centerContent={true}
           >
-            <FeaturedCard />
-            <FeaturedCard />
-            <FeaturedCard />
+            {events.slice(0, 3).map((event, i) => (
+              <FeaturedCard
+                key={i}
+                idx={i}
+                event={event}
+                onPress={() => {
+                  navigation.navigate("EventScreen");
+                }}
+              />
+            ))}
           </ScrollView>
           <Text style={styles.featuredTitle}>Popular Events</Text>
-          <View style={{marginBottom: 80}}>
-          <PopularEventCard />
-          <PopularEventCard />
-          <PopularEventCard />
-          <PopularEventCard />
+          <View style={{ marginBottom: 80 }}>
+            {events.slice(4, 8).map((event, i) => (
+              <PopularEventCard event={event} key={i} />
+            ))}
           </View>
         </ScrollView>
       </SafeAreaView>

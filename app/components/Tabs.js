@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import HomeScreen from "../screens/HomeScreen";
+import HomeEventNavigator from "../HomeEventNavigation";
+import CreateEventScreen from "../screens/CreateEventScreen";
 import TicketScreen from "../screens/TicketScreen";
 
 const Tab = createBottomTabNavigator();
@@ -15,8 +16,8 @@ const Tabs = () => {
             iconName = "home";
           } else if (route.name === "Tickets") {
             iconName = "copy";
-          } else if (route.name === "Settings") {
-            iconName = "settings-sharp";
+          } else if (route.name === "Events") {
+            iconName = "add-circle-outline";
           }
           // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -32,9 +33,9 @@ const Tabs = () => {
         },
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeEventNavigator} />
       <Tab.Screen name="Tickets" component={TicketScreen} />
-      <Tab.Screen name="Settings" component={HomeScreen} />
+      <Tab.Screen name="Events" component={CreateEventScreen} />
     </Tab.Navigator>
   );
 };

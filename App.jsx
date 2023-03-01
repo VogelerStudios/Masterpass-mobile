@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import Tabs from "./app/components/Tabs";
 import StartScreen from "./app/screens/StartScreen";
@@ -10,7 +10,7 @@ import SignUpScreen from "./app/screens/SignUpScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   if (isLogin) {
     return (
       <NavigationContainer>
@@ -27,18 +27,15 @@ export default function App() {
         >
           <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          {/* <Stack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+          /> */}
+          <Stack.Screen name="SignUp">
+            {(props) => <SignUpScreen isLogged={isLogin} logUser={setIsLogin}/>}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

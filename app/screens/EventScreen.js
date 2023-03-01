@@ -10,11 +10,9 @@ import {
 import CheckoutModal from "../components/CheckoutModal";
 import PrimaryButton from "../components/PrimaryButton";
 
-const EventScreen = () => {
+const EventScreen = ({ route, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
-
   return (
-    
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       <Image
@@ -22,10 +20,13 @@ const EventScreen = () => {
         source={require("../../assets/Image-3.png")}
       />
       <ScrollView>
-      <CheckoutModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+        <CheckoutModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
         <View style={styles.details}>
-          <Text style={styles.info}>2000s Latin Night</Text>
-          <Text style={styles.date}>📆 28 Feb - 7:00 PM</Text>
+          <Text style={styles.info}>TechTunes</Text>
+          <Text style={styles.date}>📆 2 Dec - 7:00 PM</Text>
           <Text style={styles.location}>📍 Miami Beach</Text>
         </View>
         <View style={styles.organizer}>
@@ -44,12 +45,12 @@ const EventScreen = () => {
           nec eu tortor interdum ultricies viverra feugiat tristique a.
         </Text>
         <Image style={styles.map} source={require("../../assets/Map-2.png")} />
+        <PrimaryButton
+          title={"Buy Ticket $40"}
+          style={{ alignSelf: "center", marginTop: 30,  marginBottom: 160 }}
+          onPress={() => setModalVisible(true)}
+        />
       </ScrollView>
-      <PrimaryButton
-        title={"Buy Ticket $40"}
-        style={{ alignSelf: "center", marginBottom: 40 }}
-        onPress={() => setModalVisible(true)}
-      />
     </View>
   );
 };

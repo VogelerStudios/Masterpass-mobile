@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { createPayment } from "../utils/OpenPGP";
 import PrimaryButton from "./PrimaryButton";
 import PrimaryTextInput from "./PrimaryTextInput";
 
 const CheckoutModal = ({ modalVisible, setModalVisible }) => {
   const [cardNumber, setCardNumber] = useState("");
+  const [amount, setAmount] = useState("1");
 
   const handleCardNumberChange = (newText) => {
     setCardNumber(newText);
+  };
+
+  const saveCardDetails = async () => {
+    // Card for testing
+    const checkoutTicket = await createPayment(amount);
+    console.log("checkoutTicket: ", checkoutTicket);
   };
 
   return (
@@ -29,12 +37,12 @@ const CheckoutModal = ({ modalVisible, setModalVisible }) => {
             >
               <Text>X</Text>
             </Pressable>
-            <Text style={{fontWeight: "600"}}> Complete Payment </Text>
+            <Text style={{ fontWeight: "600" }}> Complete Payment </Text>
             <PrimaryTextInput
               placeholder="Card Number"
               iconName="credit-card"
               onChangeText={handleCardNumberChange}
-              value={cardNumber}
+              value={"4007400000000007"}
               style={{
                 marginTop: 18,
               }}
@@ -50,20 +58,22 @@ const CheckoutModal = ({ modalVisible, setModalVisible }) => {
               <PrimaryTextInput
                 placeholder="MM/YY"
                 onChangeText={handleCardNumberChange}
-                value={cardNumber}
+                value={"01/2020"}
                 style={{ width: "40%" }}
               />
               <PrimaryTextInput
                 placeholder="CVV"
                 onChangeText={handleCardNumberChange}
-                value={cardNumber}
+                value={"220"}
                 style={{ width: "40%", marginLeft: 44 }}
               />
             </View>
             <PrimaryButton
               title={"Confirm $40"}
-              onPress={() => {
-                console.log("Pressed");
+              onPress={async () => {
+                setAmount(40);
+                await saveCardDetails();
+                setModalVisible(false);
               }}
               style={{ marginTop: 24 }}
             />

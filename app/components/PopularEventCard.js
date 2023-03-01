@@ -1,16 +1,16 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-const PopularEventCard = () => {
+const PopularEventCard = ({event}) => {
   return (
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../assets/Image-2.png")}
+        source={{uri: event.eventIconURL}}
       />
       <View>
-        <Text style={styles.date}>23 Oct - 08:00 PM</Text>
-        <Text style={styles.info}>Disco Tehran - Goodbye Party</Text>
+        <Text style={styles.date}>23 Oct - Time: TBD</Text>
+        <Text style={styles.info}>{event.name}</Text>
       </View>
     </View>
   );
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     width: 72,
     height: 72,
     marginLeft: 12,
+    borderRadius: 8,
   },
   info: {
     width: 220,
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "700",
     fontSize: 14,
+    marginTop: 8,
     color: "#1A202C"
   },
   date: {
